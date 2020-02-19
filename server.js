@@ -4,7 +4,7 @@ var exphs = require('express-handlebars');
 var mongoose = require('mongoose');
 
 // Set up port
-var PORT = port.env.PORT || 3000;
+var PORT = process.env.PORT || 3000;
 
 // Express instance
 var app = express();
@@ -21,6 +21,7 @@ app.use(express.static('public'));
 
 // Connect handlebars to Express app
 app.engine('handlebars', exphs({ defaultLayout: 'main' }));
+app.set('view engine', 'handlebars');
 
 // Route all requests through my middleware
 app.use(routes);
@@ -33,5 +34,5 @@ mongoose.connect(MONGODB_URI);
 
 // Listen to port
 app.listen(function () {
-    console.log('http://localhost:' + PORT);
+    console.log('Server listening on http://localhost:' + PORT);
 });
